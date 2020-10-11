@@ -7,14 +7,34 @@ const myWalletAddress = myKey.getPublic('hex');
 
 let mCoin = new Blockchain();
 
-const tx1 = new Transaction(myWalletAddress, 'public key goes here', 10);
-tx1.signTransaction(myKey);
-mCoin.addTransaction(tx1);
 
-console.log("\n Starting the miner...");
-mCoin.minePendingTransactions(myWalletAddress);
+//function to create 5 transactions
+function testTransactions(){
+    for(var i = 0; i < 5; i++){
+        const tx = new Transaction(myWalletAddress, 'public key goes here', 10);
+        tx.signTransaction(myKey);
+        mCoin.addTransaction(tx);
+        
+        console.log("\n Starting the miner...");
+        mCoin.minePendingTransactions(myWalletAddress);
+        
+        
+        console.log('\n Balance of miner is ', mCoin.getBalanceOfAddress(myWalletAddress));
+        
+        console.log('is chain valid?', mCoin.isChainValid());
+    }
+}
+
+testTransactions();
+
+// const tx1 = new Transaction(myWalletAddress, 'public key goes here', 10);
+// tx1.signTransaction(myKey);
+// mCoin.addTransaction(tx1);
+
+// console.log("\n Starting the miner...");
+// mCoin.minePendingTransactions(myWalletAddress);
 
 
-console.log('\n Balance of miner is ', mCoin.getBalanceOfAddress(myWalletAddress));
+// console.log('\n Balance of miner is ', mCoin.getBalanceOfAddress(myWalletAddress));
 
-console.log('is chain valid?', mCoin.isChainValid());
+// console.log('is chain valid?', mCoin.isChainValid());
